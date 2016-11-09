@@ -48,9 +48,5 @@ private:
 	Point_2 s, t;
 };
 
-inline std::ostream& operator<< (std::ostream& o, const Segment_2& p) {
-	return o << p.source () << "-" << p.target ();
-}
-
 } // end of namespace cbop
 #endif

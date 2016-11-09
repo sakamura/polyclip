@@ -10,11 +10,9 @@
 
 #include <vector>
 #include <list>
-#include <string>
 #include <set>
 #include <queue>
 #include <functional>
-#include <iostream>
 
 #include "polygon.h"
 

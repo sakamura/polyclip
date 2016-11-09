@@ -5,10 +5,8 @@
  Enjoy the code :)
  */
 
-#include <cstdlib>
-#include <fstream>
-#include <sstream>
 #include <algorithm>
+#include <cassert>
 #include "booleanop.h"
 
 using namespace cbop;
@@ -16,21 +14,6 @@ using namespace cbop;
 SweepEvent::SweepEvent (bool b, const Point_2& p, SweepEvent* other, PolygonType pt, EdgeType et) : 
   left (b), point (p), otherEvent (other), pol (pt), type (et), prevInResult (0), inResult (false)
 {
-}
-
-std::string SweepEvent::toString () const
-{
-	std::ostringstream oss;
-	oss << '(' << point.x () << ',' << point.y () << ')';
-	oss << " (" << (left ? "left" : "right") << ')';
-	Segment_2 s (point, otherEvent->point);
-	oss << " S:[(" << s.min ().x () << ',' << s.min ().y () << ") - (" << s.max ().x () << ',' << s.max ().y () << ")]";
-	oss << " (" << (pol == SUBJECT ? "SUBJECT" : "CLIPPING") << ')';
-	std::string et[4] =  { "NORMAL", "NON_CONTRIBUTING", "SAME_TRANSITION", "DIFFERENT_TRANSITION" };
-	oss << " (" << et[type] << ')';
-	oss << " (" << (inOut ? "inOut" : "outIn") << ')';
-	oss << " otherInOut: (" << (otherInOut ? "inOut" : "outIn") << ')';
-	return oss.str ();
 }
 
 // le1 and le2 are the left events of line segments (le1->point, le1->otherEvent->point) and (le2->point, le2->otherEvent->point)
@@ -228,10 +211,8 @@ int BooleanOpImp::possibleIntersection (SweepEvent* le1, SweepEvent* le2)
 	if ((nintersections == 1) && ((le1->point == le2->point) || (le1->otherEvent->point == le2->otherEvent->point)))
 		return 0; // the line segments intersect at an endpoint of both line segments
 
-	if (nintersections == 2 && le1->pol == le2->pol) {
-		std::cerr << "Sorry, edges of the same polygon overlap\n";
-		exit (1); // the line segments overlap, but they belong to the same polygon
-	}
+    assert (!(nintersections == 2 && le1->pol == le2->pol));
+    // std::cerr << "Sorry, edges of the same polygon overlap\n";
 
 	// The line segments associated to le1 and le2 intersect
 	if (nintersections == 1) {
@@ -287,19 +268,18 @@ int BooleanOpImp::possibleIntersection (SweepEvent* le1, SweepEvent* le2)
 
 void BooleanOpImp::divideSegment (SweepEvent* le, const Point_2& p)
 {
-//	std::cout << "YES. INTERSECTION" << std::endl;
 	// "Right event" of the "left line segment" resulting from dividing le->segment ()
 	SweepEvent* r = storeSweepEvent (SweepEvent (false, p, le, le->pol/*, le->type*/));
 	// "Left event" of the "right line segment" resulting from dividing le->segment ()
 	SweepEvent* l = storeSweepEvent (SweepEvent (true, p, le->otherEvent, le->pol/*, le->other->type*/));
 	if (sec (l, le->otherEvent)) { // avoid a rounding error. The left event would be processed after the right event
-		std::cout << "Oops" << std::endl;
+		//std::cout << "Oops" << std::endl;
 		le->otherEvent->left = true;
 		l->left = false;
 	}
-	if (sec (le, r)) { // avoid a rounding error. The left event would be processed after the right event
-		std::cout << "Oops2" << std::endl;
-	}
+    //	if (sec (le, r)) { // avoid a rounding error. The left event would be processed after the right event
+    //		std::cout << "Oops2" << std::endl;
+    //	}
 	le->otherEvent->otherEvent = l;
 	le->otherEvent = r;
 	eq.push (l);

@@ -12,7 +12,6 @@
 #ifndef POINT_2_H
 #define POINT_2_H
 
-#include <iostream>
 #include <cmath>
 #include "bbox_2.h"
 
@@ -38,17 +37,6 @@ private:
 
 inline bool operator== (const Point_2& p1, const Point_2& p2) { return (p1.x () == p2.x ()) && (p1.y () == p2.y ()); }
 inline bool operator!= (const Point_2& p1, const Point_2& p2) { return !(p1 == p2); }
-
-inline std::ostream& operator<< (std::ostream& o, const Point_2& p) {
-	return o << "(" << p.x () << "," << p.y () << ")";
-}
-
-inline std::istream& operator>> (std::istream& i, Point_2& p) {
-	double x, y;
-	i >> x >> y;
-	p = Point_2 (x, y);
-	return i;
-}
 
 } // end of namespace cbop
 #endif

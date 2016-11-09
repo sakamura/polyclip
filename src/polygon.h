@@ -110,8 +110,5 @@ private:
 	std::vector<Contour> contours;
 };
 
-std::ostream& operator<< (std::ostream& o, Polygon& p);
-std::istream& operator>> (std::istream& i, Polygon& p);
-
 } // end of namespace cbop
 #endif
