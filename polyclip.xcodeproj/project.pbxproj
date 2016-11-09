@@ -1,0 +1,282 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9694B8FE1DD2B55C00CE0F5A /* booleanop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9694B8F61DD2B55C00CE0F5A /* booleanop.cpp */; };
+		9694B8FF1DD2B55C00CE0F5A /* polygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9694B8F91DD2B55C00CE0F5A /* polygon.cpp */; };
+		9694B9001DD2B55C00CE0F5A /* utilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9694B8FC1DD2B55C00CE0F5A /* utilities.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9694B8E11DD2A45300CE0F5A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		9694B8E31DD2A45300CE0F5A /* libpolyclip.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libpolyclip.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9694B8F51DD2B55C00CE0F5A /* bbox_2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bbox_2.h; sourceTree = "<group>"; };
+		9694B8F61DD2B55C00CE0F5A /* booleanop.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = booleanop.cpp; sourceTree = "<group>"; };
+		9694B8F71DD2B55C00CE0F5A /* booleanop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = booleanop.h; sourceTree = "<group>"; };
+		9694B8F81DD2B55C00CE0F5A /* point_2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = point_2.h; sourceTree = "<group>"; };
+		9694B8F91DD2B55C00CE0F5A /* polygon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = polygon.cpp; sourceTree = "<group>"; };
+		9694B8FA1DD2B55C00CE0F5A /* polygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = polygon.h; sourceTree = "<group>"; };
+		9694B8FB1DD2B55C00CE0F5A /* segment_2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = segment_2.h; sourceTree = "<group>"; };
+		9694B8FC1DD2B55C00CE0F5A /* utilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utilities.cpp; sourceTree = "<group>"; };
+		9694B8FD1DD2B55C00CE0F5A /* utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utilities.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9694B8E01DD2A45300CE0F5A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9694B8DA1DD2A45300CE0F5A = {
+			isa = PBXGroup;
+			children = (
+				9694B8E51DD2A45300CE0F5A /* src */,
+				9694B8E41DD2A45300CE0F5A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9694B8E41DD2A45300CE0F5A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9694B8E31DD2A45300CE0F5A /* libpolyclip.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9694B8E51DD2A45300CE0F5A /* src */ = {
+			isa = PBXGroup;
+			children = (
+				9694B8F51DD2B55C00CE0F5A /* bbox_2.h */,
+				9694B8F61DD2B55C00CE0F5A /* booleanop.cpp */,
+				9694B8F71DD2B55C00CE0F5A /* booleanop.h */,
+				9694B8F81DD2B55C00CE0F5A /* point_2.h */,
+				9694B8F91DD2B55C00CE0F5A /* polygon.cpp */,
+				9694B8FA1DD2B55C00CE0F5A /* polygon.h */,
+				9694B8FB1DD2B55C00CE0F5A /* segment_2.h */,
+				9694B8FC1DD2B55C00CE0F5A /* utilities.cpp */,
+				9694B8FD1DD2B55C00CE0F5A /* utilities.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9694B8E21DD2A45300CE0F5A /* polyclip */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9694B8EC1DD2A45400CE0F5A /* Build configuration list for PBXNativeTarget "polyclip" */;
+			buildPhases = (
+				9694B8DF1DD2A45300CE0F5A /* Sources */,
+				9694B8E01DD2A45300CE0F5A /* Frameworks */,
+				9694B8E11DD2A45300CE0F5A /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = polyclip;
+			productName = polyclip;
+			productReference = 9694B8E31DD2A45300CE0F5A /* libpolyclip.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9694B8DB1DD2A45300CE0F5A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = "Michel Donais";
+				TargetAttributes = {
+					9694B8E21DD2A45300CE0F5A = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 6UA46ZJEU9;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 9694B8DE1DD2A45300CE0F5A /* Build configuration list for PBXProject "polyclip" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 9694B8DA1DD2A45300CE0F5A;
+			productRefGroup = 9694B8E41DD2A45300CE0F5A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9694B8E21DD2A45300CE0F5A /* polyclip */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9694B8DF1DD2A45300CE0F5A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9694B9001DD2B55C00CE0F5A /* utilities.cpp in Sources */,
+				9694B8FF1DD2B55C00CE0F5A /* polygon.cpp in Sources */,
+				9694B8FE1DD2B55C00CE0F5A /* booleanop.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		9694B8EA1DD2A45300CE0F5A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		9694B8EB1DD2A45400CE0F5A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9694B8ED1DD2A45400CE0F5A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 6UA46ZJEU9;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		9694B8EE1DD2A45400CE0F5A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 6UA46ZJEU9;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9694B8DE1DD2A45300CE0F5A /* Build configuration list for PBXProject "polyclip" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9694B8EA1DD2A45300CE0F5A /* Debug */,
+				9694B8EB1DD2A45400CE0F5A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9694B8EC1DD2A45400CE0F5A /* Build configuration list for PBXNativeTarget "polyclip" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9694B8ED1DD2A45400CE0F5A /* Debug */,
+				9694B8EE1DD2A45400CE0F5A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9694B8DB1DD2A45300CE0F5A /* Project object */;
+}
