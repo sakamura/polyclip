@@ -1,10 +1,9 @@
-/***************************************************************************
- *   Developer: Francisco Martínez del Río (2012)                          *  
- *   fmartin@ujaen.es                                                      *
- *   Version: 1.0                                                          *
- *                                                                         *
- *   This is a public domain program                                       *
- ***************************************************************************/
+/*
+ Original file by Francisco Martínez del Río.
+ 
+ This version is licensed as : http://unlicense.org . Please see LICENSE and README.md for more information.
+ Enjoy the code :)
+ */
 
 #ifndef POLYGON_H
 #define POLYGON_H
@@ -29,8 +28,8 @@ public:
 	Segment_2 segment (unsigned p) const { return (p == nvertices () - 1) ? Segment_2 (points.back (), points.front ()) : 
 	                                                                        Segment_2 (points[p], points[p+1]); }
 	/** Number of vertices and edges */
-	unsigned nvertices () const { return points.size (); }
-	unsigned nedges () const { return points.size (); }
+	unsigned nvertices () const { return (unsigned)points.size (); }
+	unsigned nedges () const { return (unsigned)points.size (); }
 	/** Get the bounding box */
 	Bbox_2 bbox () const;
 	/** Return if the contour is counterclockwise oriented */
@@ -53,7 +52,7 @@ public:
 	Point_2& back () { return points.back (); }
 	const Point_2& back () const { return points.back (); }
 	void addHole (unsigned int ind) { holes.push_back (ind); }
-	unsigned int nholes () const { return holes.size (); }
+	unsigned int nholes () const { return (unsigned int)holes.size (); }
 	unsigned int hole (unsigned int p) const { return holes[p]; }
 	bool external () const { return _external; }
 	void setExternal (bool e) { _external = e; }
@@ -86,7 +85,7 @@ public:
 	Contour& operator[] (unsigned int p) { return contours[p]; }
 	const Contour& operator[] (unsigned int p) const { return contours[p]; }
 	/** Number of contours */
-	unsigned int ncontours () const { return contours.size (); }
+	unsigned int ncontours () const { return (unsigned int)contours.size (); }
 	/** Number of vertices */
 	unsigned int nvertices () const;
 	/** Get the bounding box */

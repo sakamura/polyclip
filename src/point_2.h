@@ -1,10 +1,9 @@
-/***************************************************************************
- *   Developer: Francisco Martínez del Río (2012)                          *  
- *   fmartin@ujaen.es                                                      *
- *   Version: 1.0                                                          *
- *                                                                         *
- *   This is a public domain program                                       *
- ***************************************************************************/
+/*
+ Original file by Francisco Martínez del Río.
+ 
+ This version is licensed as : http://unlicense.org . Please see LICENSE and README.md for more information.
+ Enjoy the code :)
+ */
 
 // ------------------------------------------------------------------
 // Point_2 Class - A point in the plane

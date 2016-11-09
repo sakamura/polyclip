@@ -1,10 +1,9 @@
-/***************************************************************************
- *   Developer: Francisco Martínez del Río (2012)                          *  
- *   fmartin@ujaen.es                                                      *
- *   Version: 1.0                                                          *
- *                                                                         *
- *   This is a public domain program                                       *
- ***************************************************************************/
+/*
+ Original file by Francisco Martínez del Río.
+ 
+ This version is licensed as : http://unlicense.org . Please see LICENSE and README.md for more information.
+ Enjoy the code :)
+ */
 
 #ifndef BOOLEANOP_H
 #define BOOLEANOP_H
@@ -16,10 +15,6 @@
 #include <queue>
 #include <functional>
 #include <iostream>
-#ifdef __STEPBYSTEP
-	#include <QThread>
-	#include <QSemaphore>
-#endif
 
 #include "polygon.h"
 
@@ -86,33 +81,12 @@ bool operator() (const SweepEvent* e1, const SweepEvent* e2)
 };
 
 class BooleanOpImp
-#ifdef __STEPBYSTEP
- : public QThread
-#endif
 {
 public:
 	BooleanOpImp (const Polygon& subj, const Polygon& clip, Polygon& result, BooleanOpType op
-#ifdef __STEPBYSTEP
-,QSemaphore* ds = 0, QSemaphore* sd = 0, bool trace = false
-#endif
 );
 	void run ();
 
-#ifdef __STEPBYSTEP
-	typedef std::set<SweepEvent*, SegmentComp>::const_iterator const_sl_iterator;
-	typedef std::deque<SweepEvent*>::const_iterator const_sortedEvents_iterator;
-	typedef std::vector<SweepEvent*>::const_iterator const_out_iterator;
-	const_sl_iterator beginSL () const { return sl.begin (); }
-	const_sl_iterator endSL () const { return sl.end (); }
-	const_sortedEvents_iterator beginSortedEvents () const { return sortedEvents.begin (); }
-	const_sortedEvents_iterator endSortedEvents () const { return sortedEvents.end (); }
-	SweepEvent* currentEvent () const { return _currentEvent; }
-	SweepEvent* previousEvent () const { return _previousEvent; }
-	SweepEvent* nextEvent () const { return _nextEvent; }
-	Point_2 currentPoint () const { return _currentPoint; }
-	const_out_iterator beginOut () const { return out.begin (); }
-	const_out_iterator endOut () const { return out.end (); }
-#endif
 private:
 	const Polygon& subject;
 	const Polygon& clipping;
@@ -139,17 +113,6 @@ private:
 	// connect the solution edges to build the result polygon
 	void connectEdges ();
 	int nextPos (int pos, const std::vector<SweepEvent*>& resultEvents, const std::vector<bool>& processed);
-
-#ifdef __STEPBYSTEP
-	bool trace;
-	SweepEvent* _currentEvent;
-	SweepEvent* _previousEvent;
-	SweepEvent* _nextEvent;
-	Point_2 _currentPoint;
-	QSemaphore* doSomething;
-	QSemaphore* somethingDone;
-	std::vector<SweepEvent*> out;
-#endif
 };
 
 inline void compute (const Polygon& subj, const Polygon& clip, Polygon& result, BooleanOpType op)

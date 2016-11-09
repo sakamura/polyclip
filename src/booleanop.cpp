@@ -1,10 +1,9 @@
-/***************************************************************************
- *   Developer: Francisco Martínez del Río (2012)                          *  
- *   fmartin@ujaen.es                                                      *
- *   Version: 1.0                                                          *
- *                                                                         *
- *   This is a public domain program                                       *
- ***************************************************************************/
+/*
+ Original file by Francisco Martínez del Río.
+ 
+ This version is licensed as : http://unlicense.org . Please see LICENSE and README.md for more information.
+ Enjoy the code :)
+ */
 
 #include <cstdlib>
 #include <fstream>
@@ -64,14 +63,7 @@ bool SegmentComp::operator() (SweepEvent* le1, SweepEvent* le2)
 	return comp (le1, le2);
 }
 
-BooleanOpImp::BooleanOpImp (const Polygon& subj, const Polygon& clip, Polygon& res, BooleanOpType op 
-#ifdef __STEPBYSTEP
-, QSemaphore* ds, QSemaphore* sd, bool t
-#endif
-) : subject (subj), clipping (clip), result (res), operation (op), eq (), sl (), eventHolder ()
-#ifdef __STEPBYSTEP
-, trace (t), _currentEvent (0), _previousEvent (0), _nextEvent (0), doSomething (ds), somethingDone (sd), out ()
-#endif
+BooleanOpImp::BooleanOpImp (const Polygon& subj, const Polygon& clip, Polygon& res, BooleanOpType op) : subject (subj), clipping (clip), result (res), operation (op), eq (), sl (), eventHolder ()
 {
 }
 
@@ -100,24 +92,11 @@ void BooleanOpImp::run ()
 			return;
 		}
 		sortedEvents.push_back (se);
-#ifdef __STEPBYSTEP
-		if (trace) {
-			doSomething->acquire ();
-			_currentPoint = se->point;
-		}
-#endif
 		eq.pop ();
 		if (se->left) { // the line segment must be inserted into sl
 			next = prev = se->posSL = it = sl.insert(se).first;
 			(prev != sl.begin()) ? --prev : prev = sl.end();
 			++next;
-#ifdef __STEPBYSTEP
-			if (trace) {
-				_currentEvent = *it;
-				_previousEvent = prev != sl.end () ? *prev : 0;
-				_nextEvent = next != sl.end () ? *next : 0;
-			}
-#endif
 			computeFields (se, prev);
 			// Process a possible intersection between "se" and its next neighbor in sl
 			if (next != sl.end()) {
@@ -140,22 +119,11 @@ void BooleanOpImp::run ()
 			next = prev = it = se->posSL; // se->posSL; is equal than sl.find (se); but faster
 			(prev != sl.begin()) ? --prev : prev = sl.end();
 			++next;
-#ifdef __STEPBYSTEP
-			if (trace) {
-				_currentEvent = *it;
-				_previousEvent = prev != sl.end () ? *prev : 0;
-				_nextEvent = next != sl.end () ? *next : 0;
-			}
-#endif
 			// delete line segment associated to "se" from sl and check for intersection between the neighbors of "se" in sl
 			sl.erase (it);
 			if (next != sl.end() && prev != sl.end())
 				possibleIntersection (*prev, *next);
 		}
-#ifdef __STEPBYSTEP
-		if (trace)
-			somethingDone->release ();
-#endif
 	}
 	connectEdges ();
 }
@@ -394,13 +362,7 @@ void BooleanOpImp::connectEdges ()
 		Point_2 initial = resultEvents[i]->point;
 		contour.add (initial);
 		while (resultEvents[pos]->otherEvent->point != initial) {
-#ifdef __STEPBYSTEP
-			if (trace) {
-				doSomething->acquire ();
-				out.push_back (resultEvents[pos]->left ? resultEvents[pos] : resultEvents[pos]->otherEvent);
-			}
-#endif
-			processed[pos] = true; 
+			processed[pos] = true;
 			if (resultEvents[pos]->left) {
 				resultEvents[pos]->resultInOut = false;
 				resultEvents[pos]->contourId = contourId;
@@ -411,15 +373,7 @@ void BooleanOpImp::connectEdges ()
 			processed[pos = resultEvents[pos]->pos] = true; 
 			contour.add (resultEvents[pos]->point);
 			pos = nextPos (pos, resultEvents, processed);
-#ifdef __STEPBYSTEP
-			if (trace)
-				somethingDone->release ();
-#endif
 		}
-#ifdef __STEPBYSTEP
-		if (trace)
-			out.push_back (resultEvents[pos]->left ? resultEvents[pos] : resultEvents[pos]->otherEvent);
-#endif
 		processed[pos] = processed[resultEvents[pos]->pos] = true;
 		resultEvents[pos]->otherEvent->resultInOut = true; 
 		resultEvents[pos]->otherEvent->contourId = contourId;
