@@ -8,7 +8,9 @@
 #include <algorithm>
 #include "utilities.h"
 
-using namespace cbop;
+
+namespace cbop
+{
 
 static int findIntersection (double u0, double u1, double v0, double v1, double w[2])
 {
@@ -31,7 +33,7 @@ static int findIntersection (double u0, double u1, double v0, double v1, double 
 	}
 }
 
-int cbop::findIntersection (const Segment_2& seg0, const Segment_2& seg1, Point_2& pi0, Point_2& pi1)
+int findIntersection (const Segment_2& seg0, const Segment_2& seg1, Point_2& pi0, Point_2& pi1)
 {
 	Point_2 p0 = seg0.source ();
 	Point_2 d0 (seg0.target ().x () - p0.x (), seg0.target ().y () - p0.y ());
@@ -78,7 +80,7 @@ int cbop::findIntersection (const Segment_2& seg0, const Segment_2& seg1, Point_
 	double smin = std::min (s0, s1);
 	double smax = std::max (s0, s1);
 	double w[2];
-	int imax = ::findIntersection (0.0, 1.0, smin, smax, w);
+	int imax = findIntersection (0.0, 1.0, smin, smax, w);
 
 	if (imax > 0) {
 		pi0 = Point_2 (p0.x () + w[0] * d0.x (), p0.y () + w[0] * d0.y ());
@@ -90,4 +92,6 @@ int cbop::findIntersection (const Segment_2& seg0, const Segment_2& seg1, Point_
 			pi1 = Point_2 (p0.x () + w[1] * d0.x (), p0.y () + w[1] * d0.y ());
 	}
 	return imax;
+}
+
 }

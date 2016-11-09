@@ -120,4 +120,7 @@ inline void compute (const Polygon& subj, const Polygon& clip, Polygon& result, 
 }
 
 } // end of namespace cbop
+
+#include "booleanop.inl"
+
 #endif

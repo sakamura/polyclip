@@ -10,7 +10,8 @@
 #include <algorithm>
 #include "polygon.h"
 
-using namespace cbop;
+namespace cbop
+{
 
 Bbox_2 Contour::bbox () const
 {
@@ -80,22 +81,22 @@ void Polygon::move (double x, double y)
  * **********************************************************************************************************/
 
 namespace { // start of anonymous namespace
-	struct SweepEvent;
-	struct SegmentComp : public std::binary_function<SweepEvent*, SweepEvent*, bool> {
-		bool operator() (SweepEvent* e1, SweepEvent* e2);
+	struct SweepEventHoles;
+	struct SegmentCompHoles : public std::binary_function<SweepEventHoles*, SweepEventHoles*, bool> {
+		bool operator() (SweepEventHoles* e1, SweepEventHoles* e2);
 	};
 
-	struct SweepEvent {
+	struct SweepEventHoles {
 		Point_2 point;  // point associated with the event
 		bool left;      // is the point the left endpoint of the segment (p, other->p)?
 		int pol;        // Polygon to which the associated segment belongs to
-		SweepEvent* otherEvent; // Event associated to the other endpoint of the segment
+		SweepEventHoles* otherEvent; // Event associated to the other endpoint of the segment
 		/**  Does the segment (p, other->p) represent an inside-outside transition in the polygon for a vertical ray from (p.x, -infinite) that crosses the segment? */
 		bool inOut;
-		std::set<SweepEvent*, SegmentComp>::iterator posSL; // Only used in "left" events. Position of the event (segment) in SL
+		std::set<SweepEventHoles*, SegmentCompHoles>::iterator posSL; // Only used in "left" events. Position of the event (segment) in SL
 
 		/** Class constructor */
-		SweepEvent (const Point_2& pp, bool b, int apl) : point (pp), left (b), pol (apl) {}
+		SweepEventHoles (const Point_2& pp, bool b, int apl) : point (pp), left (b), pol (apl) {}
 		/** Return the segment associated to the SweepEvent */
 		Segment_2 segment () const { return Segment_2 (point, otherEvent->point); }
 		/** Is the line segment (point, otherEvent->point) below point p */
@@ -105,8 +106,8 @@ namespace { // start of anonymous namespace
 		bool above (const Point_2& p) const { return !below (p); }
 	};
 
-	struct SweepEventComp : public std::binary_function<SweepEvent*, SweepEvent*, bool> {
-		bool operator() (SweepEvent* e1, SweepEvent* e2) {
+	struct SweepEventCompHoles : public std::binary_function<SweepEventHoles*, SweepEventHoles*, bool> {
+		bool operator() (SweepEventHoles* e1, SweepEventHoles* e2) {
 			if (e1->point.x () < e2->point.x ()) // Different x coordinate
 				return true;
 			if (e2->point.x () < e1->point.x ()) // Different x coordinate
@@ -121,7 +122,7 @@ namespace { // start of anonymous namespace
 	};
 } // end of anonymous namespace
 
-bool SegmentComp::operator() (SweepEvent* le1, SweepEvent* le2) {
+bool SegmentCompHoles::operator() (SweepEventHoles* le1, SweepEventHoles* le2) {
 	if (le1 == le2)
 		return false;
 	if (signedArea (le1->point, le1->otherEvent->point, le2->point) != 0 || 
@@ -131,7 +132,7 @@ bool SegmentComp::operator() (SweepEvent* le1, SweepEvent* le2) {
 		if (le1->point == le2->point)
 			return le1->below (le2->otherEvent->point);
 		// Different points
-		SweepEventComp comp;
+		SweepEventCompHoles comp;
 		if (comp (le1, le2))  // has the segment associated to e1 been sorted in evp before the segment associated to e2?
 			return le1->below (le2->point);
 		// The segment associated to e2 has been sorted in evp before the segment associated to e1
@@ -140,7 +141,7 @@ bool SegmentComp::operator() (SweepEvent* le1, SweepEvent* le2) {
 	// Segments are collinear. Just a consistent criterion is used
 	if (le1->point == le2->point)
 		return le1 < le2;
-	SweepEventComp comp;
+	SweepEventCompHoles comp;
 	return comp (le1, le2);
 }
 
@@ -151,8 +152,8 @@ void Polygon::computeHoles ()
 			contour (0).changeOrientation ();
 		return;
 	}
-	std::vector<SweepEvent> ev;
-	std::vector<SweepEvent*> evp;
+	std::vector<SweepEventHoles> ev;
+	std::vector<SweepEventHoles*> evp;
 	ev.reserve (nvertices ()*2);
 	evp.reserve (nvertices ()*2);
 	for (unsigned i = 0; i < ncontours (); i++) {
@@ -161,10 +162,10 @@ void Polygon::computeHoles ()
 			Segment_2 s = contour(i).segment (j);
 			if (s.is_vertical ()) // vertical segments are not processed
 				continue;
-			ev.push_back (SweepEvent (s.source (), true, i));
-			ev.push_back (SweepEvent (s.target (), true, i));
-			SweepEvent* se1 = &ev[ev.size ()-2];
-			SweepEvent* se2 = &ev[ev.size ()-1];
+			ev.push_back (SweepEventHoles (s.source (), true, i));
+			ev.push_back (SweepEventHoles (s.target (), true, i));
+			SweepEventHoles* se1 = &ev[ev.size ()-2];
+			SweepEventHoles* se2 = &ev[ev.size ()-1];
 			se1->otherEvent = se2;
 			se2->otherEvent = se1;
 			if (se1->point.x () < se2->point.x ()) {
@@ -178,21 +179,21 @@ void Polygon::computeHoles ()
 			evp.push_back (se2);
 		}
 	}
-	sort (evp.begin (), evp.end (), SweepEventComp ()); 
+	sort (evp.begin (), evp.end (), SweepEventCompHoles ());
 
-	std::set<SweepEvent*, SegmentComp> SL; // Status line
+	std::set<SweepEventHoles*, SegmentCompHoles> SL; // Status line
 	std::vector<bool> processed (ncontours (), false);
 	std::vector<int> holeOf (ncontours (), -1);
 	unsigned int nprocessed = 0;
 	for (unsigned int i = 0; i < evp.size () && nprocessed < ncontours (); i++)  {
-		SweepEvent* e = evp[i];
+		SweepEventHoles* e = evp[i];
 
 		if (e->left) { // the segment must be inserted into S
 			e->posSL = SL.insert(e).first;
 			if (!processed[e->pol]) {
 				processed[e->pol] = true;
 				nprocessed++;
-				std::set<SweepEvent*, SegmentComp>::iterator prev = e->posSL;
+				std::set<SweepEventHoles*, SegmentCompHoles>::iterator prev = e->posSL;
 				if (prev == SL.begin ()) {
 					contour (e->pol).setCounterClockwise ();
 				} else {
@@ -222,4 +223,6 @@ void Polygon::computeHoles ()
 			SL.erase (e->otherEvent->posSL);
 		}
 	}
+}
+
 }

@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9694B8FE1DD2B55C00CE0F5A /* booleanop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9694B8F61DD2B55C00CE0F5A /* booleanop.cpp */; };
-		9694B8FF1DD2B55C00CE0F5A /* polygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9694B8F91DD2B55C00CE0F5A /* polygon.cpp */; };
-		9694B9001DD2B55C00CE0F5A /* utilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9694B8FC1DD2B55C00CE0F5A /* utilities.cpp */; };
+		9694B9021DD2D35700CE0F5A /* polyclip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9694B9011DD2D35700CE0F5A /* polyclip.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,14 +25,15 @@
 /* Begin PBXFileReference section */
 		9694B8E31DD2A45300CE0F5A /* libpolyclip.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libpolyclip.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9694B8F51DD2B55C00CE0F5A /* bbox_2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bbox_2.h; sourceTree = "<group>"; };
-		9694B8F61DD2B55C00CE0F5A /* booleanop.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = booleanop.cpp; sourceTree = "<group>"; };
+		9694B8F61DD2B55C00CE0F5A /* booleanop.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = booleanop.inl; sourceTree = "<group>"; };
 		9694B8F71DD2B55C00CE0F5A /* booleanop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = booleanop.h; sourceTree = "<group>"; };
 		9694B8F81DD2B55C00CE0F5A /* point_2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = point_2.h; sourceTree = "<group>"; };
-		9694B8F91DD2B55C00CE0F5A /* polygon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = polygon.cpp; sourceTree = "<group>"; };
+		9694B8F91DD2B55C00CE0F5A /* polygon.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = polygon.inl; sourceTree = "<group>"; };
 		9694B8FA1DD2B55C00CE0F5A /* polygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = polygon.h; sourceTree = "<group>"; };
 		9694B8FB1DD2B55C00CE0F5A /* segment_2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = segment_2.h; sourceTree = "<group>"; };
-		9694B8FC1DD2B55C00CE0F5A /* utilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utilities.cpp; sourceTree = "<group>"; };
+		9694B8FC1DD2B55C00CE0F5A /* utilities.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = utilities.inl; sourceTree = "<group>"; };
 		9694B8FD1DD2B55C00CE0F5A /* utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utilities.h; sourceTree = "<group>"; };
+		9694B9011DD2D35700CE0F5A /* polyclip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = polyclip.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +50,7 @@
 		9694B8DA1DD2A45300CE0F5A = {
 			isa = PBXGroup;
 			children = (
+				9694B9011DD2D35700CE0F5A /* polyclip.cpp */,
 				9694B8E51DD2A45300CE0F5A /* src */,
 				9694B8E41DD2A45300CE0F5A /* Products */,
 			);
@@ -68,13 +68,13 @@
 			isa = PBXGroup;
 			children = (
 				9694B8F51DD2B55C00CE0F5A /* bbox_2.h */,
-				9694B8F61DD2B55C00CE0F5A /* booleanop.cpp */,
+				9694B8F61DD2B55C00CE0F5A /* booleanop.inl */,
 				9694B8F71DD2B55C00CE0F5A /* booleanop.h */,
 				9694B8F81DD2B55C00CE0F5A /* point_2.h */,
-				9694B8F91DD2B55C00CE0F5A /* polygon.cpp */,
+				9694B8F91DD2B55C00CE0F5A /* polygon.inl */,
 				9694B8FA1DD2B55C00CE0F5A /* polygon.h */,
 				9694B8FB1DD2B55C00CE0F5A /* segment_2.h */,
-				9694B8FC1DD2B55C00CE0F5A /* utilities.cpp */,
+				9694B8FC1DD2B55C00CE0F5A /* utilities.inl */,
 				9694B8FD1DD2B55C00CE0F5A /* utilities.h */,
 			);
 			path = src;
@@ -138,9 +138,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9694B9001DD2B55C00CE0F5A /* utilities.cpp in Sources */,
-				9694B8FF1DD2B55C00CE0F5A /* polygon.cpp in Sources */,
-				9694B8FE1DD2B55C00CE0F5A /* booleanop.cpp in Sources */,
+				9694B9021DD2D35700CE0F5A /* polyclip.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

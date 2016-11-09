@@ -9,9 +9,9 @@
 #include <cassert>
 #include "booleanop.h"
 
-using namespace cbop;
-
-SweepEvent::SweepEvent (bool b, const Point_2& p, SweepEvent* other, PolygonType pt, EdgeType et) : 
+namespace cbop {
+    
+SweepEvent::SweepEvent (bool b, const Point_2& p, SweepEvent* other, PolygonType pt, EdgeType et) :
   left (b), point (p), otherEvent (other), pol (pt), type (et), prevInResult (0), inResult (false)
 {
 }
@@ -375,4 +375,6 @@ int BooleanOpImp::nextPos (int pos, const std::vector<SweepEvent*>& resultEvents
 	while (processed[newPos])
 		--newPos;
 	return newPos;
+}
+
 }

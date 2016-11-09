@@ -44,4 +44,7 @@ inline bool pointInTriangle (const Segment_2& s, const Point_2& o, const Point_2
 }
 
 } // end of namespace cbop
+
+#include "utilities.inl"
+
 #endif

@@ -111,4 +111,7 @@ private:
 };
 
 } // end of namespace cbop
+
+#include "polygon.inl"
+
 #endif
