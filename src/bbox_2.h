@@ -12,7 +12,7 @@
 #ifndef BBOX_2_H
 #define BBOX_2_H
 
-namespace cbop {
+namespace polyclip {
     
     template <typename T>
     class Bbox {
@@ -31,5 +31,5 @@ namespace cbop {
         T _xmin, _ymin, _xmax, _ymax;
     };
     
-} // end of namespace cbop
+} // end of namespace polyclip
 #endif

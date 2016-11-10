@@ -10,7 +10,7 @@
 #include <algorithm>
 #include "polygon.h"
 
-namespace cbop
+namespace polyclip
 {
     
     template <typename Segment_2>

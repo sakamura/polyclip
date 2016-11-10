@@ -13,7 +13,7 @@
 #include "utilities.h"
 #include "bbox_2.h"
 
-namespace cbop {
+namespace polyclip {
 
     template <typename Segment>
     class Contour {
@@ -122,7 +122,7 @@ namespace cbop {
         std::vector<Contour> contours;
     };
     
-} // end of namespace cbop
+} // end of namespace polyclip
 
 #include "polygon.inl"
 

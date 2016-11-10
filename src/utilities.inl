@@ -9,7 +9,7 @@
 #include "utilities.h"
 
 
-namespace cbop
+namespace polyclip
 {
     
     template <typename value_type>

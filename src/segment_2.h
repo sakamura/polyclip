@@ -15,7 +15,7 @@
 #include <algorithm>
 #include "point_2.h"
 
-namespace cbop {
+namespace polyclip {
     
     template <typename Point>
     class Segment {
@@ -51,5 +51,5 @@ namespace cbop {
         Point_2 s, t;
     };
     
-} // end of namespace cbop
+} // end of namespace polyclip
 #endif

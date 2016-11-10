@@ -9,7 +9,7 @@
 #include <cassert>
 #include "booleanop.h"
 
-namespace cbop {
+namespace polyclip {
     
     template <typename Segment_2>
     SweepEvent<Segment_2>::SweepEvent (bool b, const Point_2& p, SweepEvent* other, PolygonType pt, EdgeType et) :

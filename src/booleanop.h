@@ -16,7 +16,7 @@
 
 #include "polygon.h"
 
-namespace cbop {
+namespace polyclip {
     
     enum BooleanOpType { INTERSECTION, UNION, DIFFERENCE, XOR };
     enum EdgeType { NORMAL, NON_CONTRIBUTING, SAME_TRANSITION, DIFFERENT_TRANSITION };
@@ -136,7 +136,7 @@ namespace cbop {
         boi.run ();
     }
     
-} // end of namespace cbop
+} // end of namespace polyclip
 
 #include "booleanop.inl"
 

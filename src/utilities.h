@@ -14,7 +14,7 @@
 #include "point_2.h"
 #include "segment_2.h"
 
-namespace cbop {
+namespace polyclip {
     
     template <typename Segment_2>
     int findIntersection (const Segment_2& seg0, const Segment_2& seg1, typename Segment_2::Point_2& ip0, typename Segment_2::Point_2& ip1);
@@ -48,7 +48,7 @@ namespace cbop {
         return ((x == sign (s.target (), o, p)) && (x == sign (o, s.source (), p)));
     }
     
-} // end of namespace cbop
+} // end of namespace polyclip
 
 #include "utilities.inl"
 

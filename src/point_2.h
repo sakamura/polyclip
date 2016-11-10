@@ -15,7 +15,7 @@
 #include <cmath>
 #include "bbox_2.h"
 
-namespace cbop {
+namespace polyclip {
     
     template <typename T>
     class Point {
@@ -44,5 +44,5 @@ namespace cbop {
     template <typename T>
     inline bool operator!= (const Point<T>& p1, const Point<T>& p2) { return !(p1 == p2); }
     
-} // end of namespace cbop
+} // end of namespace polyclip
 #endif

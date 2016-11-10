@@ -3,11 +3,11 @@
 //  polyclip
 //
 
-#include "booleanop.h"
+#include "polyclip.h"
 
 extern const char* const POLYCLIP_VERSION = "1.0.0";
 
-namespace cbop
+namespace polyclip
 {
     typedef Point<double> DefaultPoint;
     typedef Segment<DefaultPoint> DefaultSegment;
