@@ -18,9 +18,9 @@ namespace polyclip
     {
         if (nvertices () == 0)
             return Bbox_2 ();
-        Bbox_2 b = vertex (0).bbox ();
+        Bbox_2 b(vertex (0));
         for (unsigned int i = 1; i < nvertices (); ++i)
-            b = b + vertex (i).bbox ();
+            b = b + Bbox_2(vertex (i));
         return b;
     }
     
@@ -32,8 +32,8 @@ namespace polyclip
         _precomputedCC = true;
         value_type area = 0.0;
         for (unsigned int c = 0; c < nvertices () - 1; c++)
-            area += vertex (c).x () * vertex (c+1).y () - vertex (c+1).x () *  vertex (c).y ();
-        area += vertex (nvertices ()-1).x () * vertex (0).y () - vertex (0).x () *  vertex (nvertices ()-1).y ();
+            area += vertex (c).x * vertex (c+1).y - vertex (c+1).x *  vertex (c).y;
+        area += vertex (nvertices ()-1).x * vertex (0).y - vertex (0).x *  vertex (nvertices ()-1).y;
         return _CC = area >= 0.0;
     }
     
@@ -41,7 +41,7 @@ namespace polyclip
     void Contour<Segment_2>::move (value_type x, value_type y)
     {
         for (unsigned int i = 0; i < points.size (); i++)
-            points[i] = Point_2 (points[i].x () + x, points[i].y () + y);
+            points[i] = Point_2 (points[i].x + x, points[i].y + y);
     }
     
     template <typename Contour>
@@ -121,12 +121,12 @@ namespace polyclip
         template <typename Segment_2>
         struct SweepEventCompHoles : public std::binary_function<SweepEventHoles<Segment_2>*, SweepEventHoles<Segment_2>*, bool> {
             bool operator() (SweepEventHoles<Segment_2>* e1, SweepEventHoles<Segment_2>* e2) {
-                if (e1->point.x () < e2->point.x ()) // Different x coordinate
+                if (e1->point.x < e2->point.x) // Different x coordinate
                     return true;
-                if (e2->point.x () < e1->point.x ()) // Different x coordinate
+                if (e2->point.x < e1->point.x) // Different x coordinate
                     return false;
                 if (e1->point != e2->point) // Different points, but same x coordinate. The event with lower y coordinate is processed first
-                    return e1->point.y () < e2->point.y ();
+                    return e1->point.y < e2->point.y;
                 if (e1->left != e2->left) // Same point, but one is a left endpoint and the other a right endpoint. The right endpoint is processed first
                     return !e1->left;
                 // Same point, both events are left endpoints or both are right endpoints. The event associate to the bottom segment is processed first
@@ -183,7 +183,7 @@ namespace polyclip
                 SweepEventHoles<Segment_2>* se2 = &ev[ev.size ()-1];
                 se1->otherEvent = se2;
                 se2->otherEvent = se1;
-                if (se1->point.x () < se2->point.x ()) {
+                if (se1->point.x < se2->point.x) {
                     se2->left = false;
                     se1->inOut = false;
                 } else {

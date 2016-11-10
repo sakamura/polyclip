@@ -58,7 +58,7 @@ namespace polyclip {
         /** Is the line segment (point, otherEvent->point) above point p */
         bool above (const Point_2& p) const { return !below (p); }
         /** Is the line segment (point, otherEvent->point) a vertical line segment */
-        bool vertical () const { return point.x () == otherEvent->point.x (); }
+        bool vertical () const { return point.x == otherEvent->point.x; }
         /** Return the line segment associated to the SweepEvent */
         Segment_2 segment () const { return Segment_2 (point, otherEvent->point); }
     };
@@ -69,12 +69,12 @@ namespace polyclip {
         // Return true means that e1 is placed at the event queue after e2, i.e,, e1 is processed by the algorithm after e2
         bool operator() (const SweepEvent<Segment_2>* e1, const SweepEvent<Segment_2>* e2)
         {
-            if (e1->point.x () > e2->point.x ()) // Different x-coordinate
+            if (e1->point.x > e2->point.x) // Different x-coordinate
                 return true;
-            if (e2->point.x () > e1->point.x ()) // Different x-coordinate
+            if (e2->point.x > e1->point.x) // Different x-coordinate
                 return false;
-            if (e1->point.y () != e2->point.y ()) // Different points, but same x-coordinate. The event with lower y-coordinate is processed first
-                return e1->point.y () > e2->point.y ();
+            if (e1->point.y != e2->point.y) // Different points, but same x-coordinate. The event with lower y-coordinate is processed first
+                return e1->point.y > e2->point.y;
             if (e1->left != e2->left) // Same point, but one is a left endpoint and the other a right endpoint. The right endpoint is processed first
                 return e1->left;
             // Same point, both events are left endpoints or both are right endpoints.
@@ -95,7 +95,7 @@ namespace polyclip {
         typedef SweepEventComp<Segment_2> SweepEventComp_2;
         typedef typename Segment_2::Point_2 Point_2;
         typedef typename Point_2::value_type value_type;
-        typedef typename Point_2::Bbox_2 Bbox_2;
+        typedef Bbox<value_type> Bbox_2;
 
         BooleanOpImp (const Polygon_2& subj, const Polygon_2& clip, Polygon_2& result, BooleanOpType op);
         void run ();

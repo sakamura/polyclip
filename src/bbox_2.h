@@ -17,8 +17,15 @@ namespace polyclip {
     template <typename T>
     class Bbox {
     public:
-        Bbox (T x_min = 0, T y_min = 0, T x_max = 0, T y_max = 0) :
+        Bbox () :
+        _xmin (0), _ymin (0), _xmax (0), _ymax (0) {}
+        Bbox (T x_min, T y_min, T x_max, T y_max) :
         _xmin (x_min), _ymin (y_min), _xmax (x_max), _ymax (y_max) {}
+        Bbox (T x, T y) :
+        _xmin (x), _ymin (y), _xmax (x), _ymax (y) {}
+        template <typename Point>
+        Bbox (const Point& point) :
+        _xmin (point.x), _ymin (point.y), _xmax (point.x), _ymax (point.y) {}
         T xmin () const { return _xmin; }
         T xmax () const { return _xmax; }
         T ymin () const { return _ymin; }

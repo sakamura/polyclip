@@ -18,31 +18,35 @@
 namespace polyclip {
     
     template <typename T>
+    struct ValuePrecision
+    {
+        static const T Precision;
+    };
+    template<> const double ValuePrecision<double>::Precision = 0.0000001;
+    template<> const float ValuePrecision<float>::Precision = 0.0001f;
+    
+    template <typename T>
     class Point {
     public:
-        typedef Bbox<T> Bbox_2;
         typedef T value_type;
         
-        Point (value_type x = 0.0, value_type y = 0.0): _x (x), _y (y) {}
-        value_type x () const { return _x; }
-        value_type y () const { return _y; }
-        Bbox_2 bbox () const { return Bbox_2 (_x, _y, _x, _y); }
-        /** Distance to other point */
-        value_type dist (const Point& p) const
-        {
-            value_type dx = x () - p.x ();
-            value_type dy = y () - p.y ();
-            return sqrt (dx * dx + dy * dy);
-        }
-    private:
-        /** coordinates */
-        value_type _x, _y;
+        Point (value_type _x = 0.0, value_type _y = 0.0): x (_x), y (_y) {}
+
+        value_type x, y;
     };
     
     template <typename T>
-    inline bool operator== (const Point<T>& p1, const Point<T>& p2) { return (p1.x () == p2.x ()) && (p1.y () == p2.y ()); }
+    inline bool operator== (const Point<T>& p1, const Point<T>& p2) { return (p1.x == p2.x) && (p1.y == p2.y); }
     template <typename T>
     inline bool operator!= (const Point<T>& p1, const Point<T>& p2) { return !(p1 == p2); }
+    template <typename Point_2>
+    inline bool isClose(const Point_2& a, const Point_2& b)
+    {
+        typedef typename Point_2::value_type value_type;
+        const value_type dx = a.x - b.x;
+        const value_type dy = a.y - b.y;
+        return sqrt (dx * dx + dy * dy) < ValuePrecision<value_type>::Precision;
+    }
     
 } // end of namespace polyclip
 #endif

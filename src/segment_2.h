@@ -39,11 +39,11 @@ namespace polyclip {
         const Point_2& target () const { return t; }
         
         /** Return the point of the segment with lexicographically smallest coordinate */
-        const Point_2& min () const { return (s.x () < t.x ()) || (s.x () == t.x () && s.y () < t.y ()) ? s : t; }
+        const Point_2& min () const { return (s.x < t.x) || (s.x == t.x && s.y < t.y) ? s : t; }
         /** Return the point of the segment with lexicographically largest coordinate */
-        const Point_2& max () const { return (s.x () > t.x ()) || (s.x () == t.x () && s.y () > t.y ()) ? s : t; }
+        const Point_2& max () const { return (s.x > t.x) || (s.x == t.x && s.y > t.y) ? s : t; }
         bool degenerate () const { return s == t; }
-        bool is_vertical () const { return s.x () == t.x (); }
+        bool is_vertical () const { return s.x == t.x; }
         /** Change the segment orientation */
         Segment& changeOrientation () { std::swap (s, t); return *this; }
     private:

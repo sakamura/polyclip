@@ -30,8 +30,8 @@ namespace polyclip {
             if (le1->point == le2->point)
                 return le1->below (le2->otherEvent->point);
             // Different left endpoint: use the left endpoint to sort
-            if (le1->point.x () == le2->point.x ())
-                return le1->point.y () < le2->point.y ();
+            if (le1->point.x == le2->point.x)
+                return le1->point.y < le2->point.y;
             SweepEventComp<Segment_2> comp;
             if (comp (le1, le2))  // has the line segment associated to e1 been inserted into S after the line segment associated to e2 ?
                 return le2->above (le1->point);
@@ -56,8 +56,8 @@ namespace polyclip {
     template <typename Contour>
     void BooleanOpImp<Contour>::run ()
     {
-        Bbox_2 subjectBB = subject.bbox ();     // for optimizations 1 and 2
-        Bbox_2 clippingBB = clipping.bbox ();   // for optimizations 1 and 2
+        Bbox_2 subjectBB(subject.bbox ());     // for optimizations 1 and 2
+        Bbox_2 clippingBB(clipping.bbox ());   // for optimizations 1 and 2
         const double MINMAXX = std::min (subjectBB.xmax (), clippingBB.xmax ()); // for optimization 2
         if (trivialOperation (subjectBB, clippingBB)) // trivial cases can be quickly resolved without sweeping the plane
             return;
@@ -73,8 +73,8 @@ namespace polyclip {
         while (! eq.empty ()) {
             SweepEvent_2* se = eq.top ();
             // optimization 2
-            if ((operation == INTERSECTION && se->point.x () > MINMAXX) ||
-                (operation == DIFFERENCE && se->point.x () > subjectBB.xmax ())) {
+            if ((operation == INTERSECTION && se->point.x > MINMAXX) ||
+                (operation == DIFFERENCE && se->point.x > subjectBB.xmax ())) {
                 connectEdges ();
                 return;
             }

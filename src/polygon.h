@@ -21,7 +21,7 @@ namespace polyclip {
         typedef Segment Segment_2;
         typedef typename Segment_2::Point_2 Point_2;
         typedef typename Point_2::value_type value_type;
-        typedef typename Point_2::Bbox_2 Bbox_2;
+        typedef Bbox<value_type> Bbox_2;
         
         typedef typename std::vector<Point_2>::iterator iterator;
         typedef typename std::vector<Point_2>::const_iterator const_iterator;
@@ -84,7 +84,7 @@ namespace polyclip {
         typedef typename Contour::Segment_2 Segment_2;
         typedef typename Segment_2::Point_2 Point_2;
         typedef typename Point_2::value_type value_type;
-        typedef typename Point_2::Bbox_2 Bbox_2;
+        typedef Bbox<value_type> Bbox_2;
         
         Polygon () : contours () {}
         
