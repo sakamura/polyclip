@@ -16,27 +16,33 @@
 #include "bbox_2.h"
 
 namespace cbop {
-
-class Point_2 {
-public:
-	Point_2 (double x = 0.0, double y = 0.0): _x (x), _y (y) {}
-	double x () const { return _x; }
-	double y () const { return _y; }
-	Bbox_2 bbox () const { return Bbox_2 (_x, _y, _x, _y); }
-/** Distance to other point */
-	float dist (const Point_2& p) const
-	{
-		float dx = x () - p.x ();
-		float dy = y () - p.y ();
-		return sqrt (dx * dx + dy * dy);
-	}
-private:
-	/** coordinates */
-	double _x, _y;
-};
-
-inline bool operator== (const Point_2& p1, const Point_2& p2) { return (p1.x () == p2.x ()) && (p1.y () == p2.y ()); }
-inline bool operator!= (const Point_2& p1, const Point_2& p2) { return !(p1 == p2); }
-
+    
+    template <typename T>
+    class Point {
+    public:
+        typedef Bbox<T> Bbox_2;
+        typedef T value_type;
+        
+        Point (value_type x = 0.0, value_type y = 0.0): _x (x), _y (y) {}
+        value_type x () const { return _x; }
+        value_type y () const { return _y; }
+        Bbox_2 bbox () const { return Bbox_2 (_x, _y, _x, _y); }
+        /** Distance to other point */
+        value_type dist (const Point& p) const
+        {
+            value_type dx = x () - p.x ();
+            value_type dy = y () - p.y ();
+            return sqrt (dx * dx + dy * dy);
+        }
+    private:
+        /** coordinates */
+        value_type _x, _y;
+    };
+    
+    template <typename T>
+    inline bool operator== (const Point<T>& p1, const Point<T>& p2) { return (p1.x () == p2.x ()) && (p1.y () == p2.y ()); }
+    template <typename T>
+    inline bool operator!= (const Point<T>& p1, const Point<T>& p2) { return !(p1 == p2); }
+    
 } // end of namespace cbop
 #endif
