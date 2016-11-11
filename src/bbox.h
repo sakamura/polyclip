@@ -9,8 +9,8 @@
 // Bbox_2 Class : A bounding box
 // ------------------------------------------------------------------
 
-#ifndef BBOX_2_H
-#define BBOX_2_H
+#ifndef BBOX_H
+#define BBOX_H
 
 namespace polyclip {
     

@@ -8,10 +8,8 @@
 #include <algorithm>
 #include "utilities.h"
 
-
 namespace polyclip
-{
-    
+{    
     template <typename value_type>
     int findIntersection (value_type u0, value_type u1, value_type v0, value_type v1, value_type w[2])
     {

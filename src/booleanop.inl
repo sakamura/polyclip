@@ -11,13 +11,13 @@
 
 namespace polyclip {
     
-    template <typename Contour>
-    BooleanOpImp<Contour>::BooleanOpImp (const Polygon_2& subj, const Polygon_2& clip, Polygon_2& res, BooleanOpType op) : subject (subj), clipping (clip), result (res), operation (op), eq (), sl (), eventHolder ()
+    template <typename Point_2>
+    BooleanOpImp<Point_2>::BooleanOpImp (const Polygon_2& subj, const Polygon_2& clip, Polygon_2& res, BooleanOpType op) : subject (subj), clipping (clip), result (res), operation (op), eq (), sl (), eventHolder ()
     {
     }
     
-    template <typename Contour>
-    void BooleanOpImp<Contour>::run ()
+    template <typename Point_2>
+    void BooleanOpImp<Point_2>::run ()
     {
         Bbox_2 subjectBB(subject.bbox ());     // for optimizations 1 and 2
         Bbox_2 clippingBB(clipping.bbox ());   // for optimizations 1 and 2
@@ -78,8 +78,8 @@ namespace polyclip {
         connectEdges ();
     }
     
-    template <typename Contour>
-    bool BooleanOpImp<Contour>::trivialOperation (const Bbox_2& subjectBB, const Bbox_2& clippingBB)
+    template <typename Point_2>
+    bool BooleanOpImp<Point_2>::trivialOperation (const Bbox_2& subjectBB, const Bbox_2& clippingBB)
     {
         // Test 1 for trivial result case
         if (subject.ncontours () * clipping.ncontours () == 0) { // At least one of the polygons is empty
@@ -104,8 +104,8 @@ namespace polyclip {
         return false;
     }
     
-    template <typename Contour>
-    void BooleanOpImp<Contour>::processSegment (const Segment_2& s, PolygonType pt)
+    template <typename Point_2>
+    void BooleanOpImp<Point_2>::processSegment (const Segment_2& s, PolygonType pt)
     {
         /*	if (s.degenerate ()) // if the two edge endpoints are equal the segment is dicarded
          return;          // This can be done as preprocessing to avoid "polygons" with less than 3 edges */
@@ -122,8 +122,8 @@ namespace polyclip {
         eq.push (e2);
     }
     
-    template <typename Contour>
-    void BooleanOpImp<Contour>::computeFields (SweepEvent_2* le, const typename std::set<SweepEvent_2*, SegmentComp_2>::iterator& prev)
+    template <typename Point_2>
+    void BooleanOpImp<Point_2>::computeFields (SweepEvent_2* le, const typename std::set<SweepEvent_2*, SegmentComp_2>::iterator& prev)
     {
         // compute inOut and otherInOut fields
         if (prev == sl.end ()) {
@@ -143,8 +143,8 @@ namespace polyclip {
         le->inResult = inResult (le);
     }
     
-    template <typename Contour>
-    bool BooleanOpImp<Contour>::inResult (SweepEvent_2* le)
+    template <typename Point_2>
+    bool BooleanOpImp<Point_2>::inResult (SweepEvent_2* le)
     {
         switch (le->type) {
             case NORMAL:
@@ -168,8 +168,8 @@ namespace polyclip {
         return false; // just to avoid the compiler warning
     }
     
-    template <typename Contour>
-    int BooleanOpImp<Contour>::possibleIntersection (SweepEvent_2* le1, SweepEvent_2* le2)
+    template <typename Point_2>
+    int BooleanOpImp<Point_2>::possibleIntersection (SweepEvent_2* le1, SweepEvent_2* le2)
     {
         //	if (e1->pol == e2->pol) // you can uncomment these two lines if self-intersecting polygons are not allowed
         //		return 0;
@@ -238,8 +238,8 @@ namespace polyclip {
         return 3;
     }
     
-    template <typename Contour>
-    void BooleanOpImp<Contour>::divideSegment (SweepEvent_2* le, const Point_2& p)
+    template <typename Point_2>
+    void BooleanOpImp<Point_2>::divideSegment (SweepEvent_2* le, const Point_2& p)
     {
         // "Right event" of the "left line segment" resulting from dividing le->segment ()
         SweepEvent_2* r = storeSweepEvent (SweepEvent_2 (false, p, le, le->pol/*, le->type*/));
@@ -259,8 +259,8 @@ namespace polyclip {
         eq.push (r);
     }
     
-    template <typename Contour>
-    void BooleanOpImp<Contour>::connectEdges ()
+    template <typename Point_2>
+    void BooleanOpImp<Point_2>::connectEdges ()
     {
         // copy the events in the result polygon to resultEvents array
         std::vector<SweepEvent_2*> resultEvents;
@@ -293,8 +293,8 @@ namespace polyclip {
         for (unsigned int i = 0; i < resultEvents.size (); i++) {
             if (processed[i])
                 continue;
-            result.push_back (Contour ());
-            Contour& contour = result.back ();
+            result.push_back (Contour_2 ());
+            Contour_2& contour = result.back ();
             unsigned int contourId = result.ncontours () - 1;
             depth.push_back (0);
             holeOf.push_back (-1);
@@ -336,8 +336,8 @@ namespace polyclip {
         }
     }
     
-    template <typename Contour>
-    int BooleanOpImp<Contour>::nextPos (int pos, const typename std::vector<SweepEvent_2*>& resultEvents, const std::vector<bool>& processed)
+    template <typename Point_2>
+    int BooleanOpImp<Point_2>::nextPos (int pos, const typename std::vector<SweepEvent_2*>& resultEvents, const std::vector<bool>& processed)
     {
         unsigned int newPos = pos + 1;
         while (newPos < resultEvents.size () && resultEvents[newPos]->point == resultEvents[pos]->point) {

@@ -10,15 +10,13 @@ extern const char* const POLYCLIP_VERSION = "1.0.0";
 namespace polyclip
 {
     typedef Point<double> DefaultPoint;
-    typedef Segment<DefaultPoint> DefaultSegment;
-    typedef Contour<DefaultSegment> DefaultContour;
-    typedef Polygon<DefaultContour> DefaultPolygon;
+    typedef Polygon<DefaultPoint> DefaultPolygon;
 
-/*    void defaultCompute()
+void defaultCompute()
     {
         DefaultPolygon subj;
         DefaultPolygon clip;
         DefaultPolygon result;
         compute(subj, clip, result, BooleanOpType::DIFFERENCE);
-    } */
+    }
 }

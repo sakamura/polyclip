@@ -7,20 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9629F2161DD405E900D558E6 /* bbox_2.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9694B8F51DD2B55C00CE0F5A /* bbox_2.h */; };
-		9629F2171DD405E900D558E6 /* booleanop.inl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9694B8F61DD2B55C00CE0F5A /* booleanop.inl */; };
-		9629F2181DD405E900D558E6 /* booleanop.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9694B8F71DD2B55C00CE0F5A /* booleanop.h */; };
-		9629F2191DD405E900D558E6 /* point_2.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9694B8F81DD2B55C00CE0F5A /* point_2.h */; };
-		9629F21A1DD405E900D558E6 /* polygon.inl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9694B8F91DD2B55C00CE0F5A /* polygon.inl */; };
-		9629F21B1DD405E900D558E6 /* polygon.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9694B8FA1DD2B55C00CE0F5A /* polygon.h */; };
-		9629F21C1DD405E900D558E6 /* segment_2.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9694B8FB1DD2B55C00CE0F5A /* segment_2.h */; };
-		9629F21D1DD405E900D558E6 /* utilities.inl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9694B8FC1DD2B55C00CE0F5A /* utilities.inl */; };
-		9629F21E1DD405E900D558E6 /* utilities.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9694B8FD1DD2B55C00CE0F5A /* utilities.h */; };
-		9629F2201DD4066600D558E6 /* polyclip.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9629F21F1DD4065E00D558E6 /* polyclip.h */; };
+		96380D531DD5C92300CADFCB /* polyclip.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 96380D4F1DD5C7B400CADFCB /* polyclip.h */; };
+		96380D541DD5C92300CADFCB /* bbox.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9694B8F51DD2B55C00CE0F5A /* bbox.h */; };
+		96380D551DD5C92300CADFCB /* booleanop.inl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9694B8F61DD2B55C00CE0F5A /* booleanop.inl */; };
+		96380D561DD5C92300CADFCB /* booleanop.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9694B8F71DD2B55C00CE0F5A /* booleanop.h */; };
+		96380D571DD5C92300CADFCB /* contour.inl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 96380D4E1DD5C5DC00CADFCB /* contour.inl */; };
+		96380D581DD5C92300CADFCB /* contour.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 96380D4D1DD5C5D000CADFCB /* contour.h */; };
+		96380D591DD5C92300CADFCB /* point.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9694B8F81DD2B55C00CE0F5A /* point.h */; };
+		96380D5A1DD5C92300CADFCB /* polygon.inl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9694B8F91DD2B55C00CE0F5A /* polygon.inl */; };
+		96380D5B1DD5C92300CADFCB /* polygon.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9694B8FA1DD2B55C00CE0F5A /* polygon.h */; };
+		96380D5C1DD5C92300CADFCB /* segment.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9694B8FB1DD2B55C00CE0F5A /* segment.h */; };
+		96380D5D1DD5C92300CADFCB /* utilities.inl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9694B8FC1DD2B55C00CE0F5A /* utilities.inl */; };
+		96380D5E1DD5C92300CADFCB /* utilities.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9694B8FD1DD2B55C00CE0F5A /* utilities.h */; };
+		96380D5F1DD5C92300CADFCB /* polyclipdefs.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9629F2211DD549E500D558E6 /* polyclipdefs.h */; };
+		96380D601DD5C92300CADFCB /* sweepevent.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9629F2221DD54A4600D558E6 /* sweepevent.h */; };
+		96380D611DD5C92300CADFCB /* sweepevent.inl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9629F2231DD54A5400D558E6 /* sweepevent.inl */; };
 		9694B9021DD2D35700CE0F5A /* polyclip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9694B9011DD2D35700CE0F5A /* polyclip.cpp */; };
-		96F41A241DD54D15003CA37E /* polyclipdefs.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9629F2211DD549E500D558E6 /* polyclipdefs.h */; };
-		96F41A251DD54D15003CA37E /* sweepevent.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9629F2221DD54A4600D558E6 /* sweepevent.h */; };
-		96F41A261DD54D16003CA37E /* sweepevent.inl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9629F2231DD54A5400D558E6 /* sweepevent.inl */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -30,37 +32,41 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				96F41A241DD54D15003CA37E /* polyclipdefs.h in CopyFiles */,
-				96F41A251DD54D15003CA37E /* sweepevent.h in CopyFiles */,
-				96F41A261DD54D16003CA37E /* sweepevent.inl in CopyFiles */,
-				9629F2201DD4066600D558E6 /* polyclip.h in CopyFiles */,
-				9629F2161DD405E900D558E6 /* bbox_2.h in CopyFiles */,
-				9629F2171DD405E900D558E6 /* booleanop.inl in CopyFiles */,
-				9629F2181DD405E900D558E6 /* booleanop.h in CopyFiles */,
-				9629F2191DD405E900D558E6 /* point_2.h in CopyFiles */,
-				9629F21A1DD405E900D558E6 /* polygon.inl in CopyFiles */,
-				9629F21B1DD405E900D558E6 /* polygon.h in CopyFiles */,
-				9629F21C1DD405E900D558E6 /* segment_2.h in CopyFiles */,
-				9629F21D1DD405E900D558E6 /* utilities.inl in CopyFiles */,
-				9629F21E1DD405E900D558E6 /* utilities.h in CopyFiles */,
+				96380D531DD5C92300CADFCB /* polyclip.h in CopyFiles */,
+				96380D541DD5C92300CADFCB /* bbox.h in CopyFiles */,
+				96380D551DD5C92300CADFCB /* booleanop.inl in CopyFiles */,
+				96380D561DD5C92300CADFCB /* booleanop.h in CopyFiles */,
+				96380D571DD5C92300CADFCB /* contour.inl in CopyFiles */,
+				96380D581DD5C92300CADFCB /* contour.h in CopyFiles */,
+				96380D591DD5C92300CADFCB /* point.h in CopyFiles */,
+				96380D5A1DD5C92300CADFCB /* polygon.inl in CopyFiles */,
+				96380D5B1DD5C92300CADFCB /* polygon.h in CopyFiles */,
+				96380D5C1DD5C92300CADFCB /* segment.h in CopyFiles */,
+				96380D5D1DD5C92300CADFCB /* utilities.inl in CopyFiles */,
+				96380D5E1DD5C92300CADFCB /* utilities.h in CopyFiles */,
+				96380D5F1DD5C92300CADFCB /* polyclipdefs.h in CopyFiles */,
+				96380D601DD5C92300CADFCB /* sweepevent.h in CopyFiles */,
+				96380D611DD5C92300CADFCB /* sweepevent.inl in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		9629F21F1DD4065E00D558E6 /* polyclip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = polyclip.h; sourceTree = "<group>"; };
 		9629F2211DD549E500D558E6 /* polyclipdefs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = polyclipdefs.h; sourceTree = "<group>"; };
 		9629F2221DD54A4600D558E6 /* sweepevent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sweepevent.h; sourceTree = "<group>"; };
 		9629F2231DD54A5400D558E6 /* sweepevent.inl */ = {isa = PBXFileReference; lastKnownFileType = text; path = sweepevent.inl; sourceTree = "<group>"; };
+		96380D4D1DD5C5D000CADFCB /* contour.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = contour.h; sourceTree = "<group>"; };
+		96380D4E1DD5C5DC00CADFCB /* contour.inl */ = {isa = PBXFileReference; lastKnownFileType = text; path = contour.inl; sourceTree = "<group>"; };
+		96380D4F1DD5C7B400CADFCB /* polyclip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = polyclip.h; sourceTree = "<group>"; };
 		9694B8E31DD2A45300CE0F5A /* libpolyclip.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libpolyclip.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		9694B8F51DD2B55C00CE0F5A /* bbox_2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bbox_2.h; sourceTree = "<group>"; };
+		9694B8F51DD2B55C00CE0F5A /* bbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bbox.h; sourceTree = "<group>"; };
 		9694B8F61DD2B55C00CE0F5A /* booleanop.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = booleanop.inl; sourceTree = "<group>"; };
 		9694B8F71DD2B55C00CE0F5A /* booleanop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = booleanop.h; sourceTree = "<group>"; };
-		9694B8F81DD2B55C00CE0F5A /* point_2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = point_2.h; sourceTree = "<group>"; };
+		9694B8F81DD2B55C00CE0F5A /* point.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = point.h; sourceTree = "<group>"; };
 		9694B8F91DD2B55C00CE0F5A /* polygon.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = polygon.inl; sourceTree = "<group>"; };
 		9694B8FA1DD2B55C00CE0F5A /* polygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = polygon.h; sourceTree = "<group>"; };
-		9694B8FB1DD2B55C00CE0F5A /* segment_2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = segment_2.h; sourceTree = "<group>"; };
+		9694B8FB1DD2B55C00CE0F5A /* segment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = segment.h; sourceTree = "<group>"; };
 		9694B8FC1DD2B55C00CE0F5A /* utilities.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = utilities.inl; sourceTree = "<group>"; };
 		9694B8FD1DD2B55C00CE0F5A /* utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utilities.h; sourceTree = "<group>"; };
 		9694B9011DD2D35700CE0F5A /* polyclip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = polyclip.cpp; sourceTree = "<group>"; };
@@ -97,19 +103,21 @@
 		9694B8E51DD2A45300CE0F5A /* src */ = {
 			isa = PBXGroup;
 			children = (
-				9694B8F51DD2B55C00CE0F5A /* bbox_2.h */,
+				9694B8F51DD2B55C00CE0F5A /* bbox.h */,
 				9694B8F61DD2B55C00CE0F5A /* booleanop.inl */,
 				9694B8F71DD2B55C00CE0F5A /* booleanop.h */,
-				9694B8F81DD2B55C00CE0F5A /* point_2.h */,
+				96380D4E1DD5C5DC00CADFCB /* contour.inl */,
+				96380D4D1DD5C5D000CADFCB /* contour.h */,
+				9694B8F81DD2B55C00CE0F5A /* point.h */,
+				96380D4F1DD5C7B400CADFCB /* polyclip.h */,
+				9629F2211DD549E500D558E6 /* polyclipdefs.h */,
 				9694B8F91DD2B55C00CE0F5A /* polygon.inl */,
 				9694B8FA1DD2B55C00CE0F5A /* polygon.h */,
-				9694B8FB1DD2B55C00CE0F5A /* segment_2.h */,
+				9694B8FB1DD2B55C00CE0F5A /* segment.h */,
+				9629F2231DD54A5400D558E6 /* sweepevent.inl */,
+				9629F2221DD54A4600D558E6 /* sweepevent.h */,
 				9694B8FC1DD2B55C00CE0F5A /* utilities.inl */,
 				9694B8FD1DD2B55C00CE0F5A /* utilities.h */,
-				9629F21F1DD4065E00D558E6 /* polyclip.h */,
-				9629F2211DD549E500D558E6 /* polyclipdefs.h */,
-				9629F2221DD54A4600D558E6 /* sweepevent.h */,
-				9629F2231DD54A5400D558E6 /* sweepevent.inl */,
 			);
 			path = src;
 			sourceTree = "<group>";

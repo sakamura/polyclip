@@ -11,8 +11,8 @@
 #define UTILITIES_H
 
 #include <algorithm>
-#include "point_2.h"
-#include "segment_2.h"
+#include "point.h"
+#include "segment.h"
 
 namespace polyclip {
     

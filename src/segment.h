@@ -6,14 +6,14 @@
  */
 
 // ------------------------------------------------------------------
-// Segment_2 Class - A line segment in the plane
+// Segment Class - A line segment in the plane
 // ------------------------------------------------------------------
 
-#ifndef SEGMENT_2_H
-#define SEGMENT_2_H
+#ifndef SEGMENT_H
+#define SEGMENT_H
 
 #include <algorithm>
-#include "point_2.h"
+#include "point.h"
 
 namespace polyclip {
     

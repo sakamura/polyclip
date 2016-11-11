@@ -19,13 +19,13 @@
 #include "sweepevent.h"
 
 namespace polyclip {
-    template <typename Contour>
+    template <typename Point_2>
     class BooleanOpImp
     {
     public:
-        typedef Polygon<Contour> Polygon_2;
-        typedef typename Contour::Segment_2 Segment_2;
-        typedef typename Segment_2::Point_2 Point_2;
+        typedef Polygon<Point_2> Polygon_2;
+        typedef Contour<Point_2> Contour_2;
+        typedef Segment<Point_2> Segment_2;
         typedef typename Point_2::value_type value_type;
         typedef Bbox<value_type> Bbox_2;
 
@@ -79,13 +79,6 @@ namespace polyclip {
         void connectEdges ();
         int nextPos (int pos, const std::vector<SweepEvent_2*>& resultEvents, const std::vector<bool>& processed);
     };
-    
-    template <typename Contour>
-    inline void compute (const Polygon<Contour>& subj, const Polygon<Contour>& clip, Polygon<Contour>& result, BooleanOpType op)
-    {
-        BooleanOpImp<Contour> boi (subj, clip, result, op);
-        boi.run ();
-    }
     
 } // end of namespace polyclip
 

@@ -6,14 +6,14 @@
  */
 
 // ------------------------------------------------------------------
-// Point_2 Class - A point in the plane
+// Point Class - A point in the plane
 // ------------------------------------------------------------------
 
-#ifndef POINT_2_H
-#define POINT_2_H
+#ifndef POINT_H
+#define POINT_H
 
 #include <cmath>
-#include "bbox_2.h"
+#include "bbox.h"
 
 namespace polyclip {
     

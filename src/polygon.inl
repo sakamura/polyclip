@@ -13,40 +13,8 @@
 
 namespace polyclip
 {
-    
-    template <typename Segment_2>
-    typename Contour<Segment_2>::Bbox_2 Contour<Segment_2>::bbox () const
-    {
-        if (nvertices () == 0)
-            return Bbox_2 ();
-        Bbox_2 b(vertex (0));
-        for (unsigned int i = 1; i < nvertices (); ++i)
-            b = b + Bbox_2(vertex (i));
-        return b;
-    }
-    
-    template <typename Segment_2>
-    bool Contour<Segment_2>::counterclockwise ()
-    {
-        if (_precomputedCC)
-            return _CC;
-        _precomputedCC = true;
-        value_type area = 0.0;
-        for (unsigned int c = 0; c < nvertices () - 1; c++)
-            area += vertex (c).x * vertex (c+1).y - vertex (c+1).x *  vertex (c).y;
-        area += vertex (nvertices ()-1).x * vertex (0).y - vertex (0).x *  vertex (nvertices ()-1).y;
-        return _CC = area >= 0.0;
-    }
-    
-    template <typename Segment_2>
-    void Contour<Segment_2>::move (value_type x, value_type y)
-    {
-        for (unsigned int i = 0; i < points.size (); i++)
-            points[i] = Point_2 (points[i].x + x, points[i].y + y);
-    }
-    
-    template <typename Contour>
-    void Polygon<Contour>::join (const Polygon& pol)
+    template <typename Point_2>
+    void Polygon<Point_2>::join (const Polygon& pol)
     {
         unsigned int size = ncontours ();
         for (unsigned int i = 0; i < pol.ncontours (); ++i) {
@@ -57,8 +25,8 @@ namespace polyclip
         }
     }
     
-    template <typename Contour>
-    unsigned Polygon<Contour>::nvertices () const
+    template <typename Point_2>
+    unsigned Polygon<Point_2>::nvertices () const
     {
         unsigned int nv = 0;
         for (unsigned int i = 0; i < ncontours (); i++)
@@ -66,8 +34,8 @@ namespace polyclip
         return nv;
     }
     
-    template <typename Contour>
-    typename Polygon<Contour>::Bbox_2 Polygon<Contour>::bbox () const
+    template <typename Point_2>
+    typename Polygon<Point_2>::Bbox_2 Polygon<Point_2>::bbox () const
     {
         if (ncontours () == 0)
             return Bbox_2 ();
@@ -77,15 +45,15 @@ namespace polyclip
         return bb;
     }
     
-    template <typename Contour>
-    void Polygon<Contour>::move (value_type x, value_type y)
+    template <typename Point_2>
+    void Polygon<Point_2>::move (value_type x, value_type y)
     {
         for (unsigned int i = 0; i < contours.size (); i++)
             contours[i].move (x, y);
     }
     
-    template <typename Contour>
-    void Polygon<Contour>::computeHoles ()
+    template <typename Point_2>
+    void Polygon<Point_2>::computeHoles ()
     {
         typedef SweepEventDefault<Segment_2, true> SweepEventHoles;
         typedef typename SweepEventHoles::Comp SweepEventCompHoles;
