@@ -7,6 +7,7 @@
 
 extern const char* const POLYCLIP_VERSION = "1.0.0";
 
+/*
 namespace polyclip
 {
     typedef Point<double> DefaultPoint;
@@ -20,3 +21,4 @@ void defaultCompute()
         compute(subj, clip, result, BooleanOpType::DIFFERENCE);
     }
 }
+*/
