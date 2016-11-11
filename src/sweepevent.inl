@@ -9,15 +9,9 @@
 
 namespace polyclip
 {
-    template <typename Segment_2>
-    SweepEvent<Segment_2>::SweepEvent (bool b, const Point_2& p, SweepEvent* other, PolygonType pt, EdgeType et) :
-    left (b), point (p), otherEvent (other), pol (pt), type (et), prevInResult (0), inResult (false)
-    {
-    }
-    
     // le1 and le2 are the left events of line segments (le1->point, le1->otherEvent->point) and (le2->point, le2->otherEvent->point)
-    template <typename Segment_2>
-    bool SegmentComp<Segment_2>::operator() (SweepEvent<Segment_2>* le1, SweepEvent<Segment_2>* le2)
+    template <typename Segment_2, bool inverseDir, typename FinalType>
+    bool SweepEvent<Segment_2, inverseDir, FinalType>::SegmentComp::operator() (const SweepEvent* le1, const SweepEvent* le2)
     {
         if (le1 == le2)
             return false;
@@ -30,7 +24,7 @@ namespace polyclip
             // Different left endpoint: use the left endpoint to sort
             if (le1->point.x == le2->point.x)
                 return le1->point.y < le2->point.y;
-            SweepEventComp<Segment_2> comp;
+            Comp comp;
             if (comp (le1, le2))  // has the line segment associated to e1 been inserted into S after the line segment associated to e2 ?
                 return le2->above (le1->point);
             // The line segment associated to e2 has been inserted into S after the line segment associated to e1
@@ -42,7 +36,26 @@ namespace polyclip
         // Just a consistent criterion is used
         if (le1->point == le2->point)
             return le1 < le2;
-        SweepEventComp<Segment_2> comp;
+        Comp comp;
         return comp (le1, le2);
+    }
+    
+    template <typename Segment_2, bool inverseDir, typename FinalType>
+    bool SweepEvent<Segment_2, inverseDir, FinalType>::Comp::operator() (const SweepEvent* e1, const SweepEvent* e2)
+    {
+        if (e1->point.x > e2->point.x) // Different x-coordinate
+            return !inverseDir;
+        if (e2->point.x > e1->point.x) // Different x-coordinate
+            return inverseDir;
+        if (e1->point.y != e2->point.y) // Different points, but same x-coordinate. The event with lower y-coordinate is processed first
+            return inverseDir ^ (e1->point.y > e2->point.y);
+        if (e1->left != e2->left) // Same point, but one is a left endpoint and the other a right endpoint. The right endpoint is processed first
+            return inverseDir ^ e1->left;
+        // Same point, both events are left endpoints or both are right endpoints.
+        if (inverseDir)
+            return e1->below(e2->otherEvent->point);
+        if (signedArea (e1->point, e1->otherEvent->point, e2->otherEvent->point) != 0) // not collinear
+            return e1->above (e2->otherEvent->point); // the event associate to the bottom segment is processed first
+        return e1->pol > e2->pol;
     }
 }

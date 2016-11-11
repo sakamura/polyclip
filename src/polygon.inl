@@ -9,7 +9,7 @@
 #include <set>
 #include <algorithm>
 #include "polygon.h"
-#include "sweepeventholes.h"
+#include "sweepevent.h"
 
 namespace polyclip
 {
@@ -87,13 +87,16 @@ namespace polyclip
     template <typename Contour>
     void Polygon<Contour>::computeHoles ()
     {
+        typedef SweepEventDefault<Segment_2, true> SweepEventHoles;
+        typedef typename SweepEventHoles::Comp SweepEventCompHoles;
+        typedef typename SweepEventHoles::SegmentComp SegmentCompHoles;
         if (ncontours () < 2) {
             if (ncontours () == 1 && contour (0).clockwise ())
                 contour (0).changeOrientation ();
             return;
         }
-        std::vector<SweepEventHoles<Segment_2> > ev;
-        std::vector<SweepEventHoles<Segment_2> *> evp;
+        std::vector<SweepEventHoles> ev;
+        std::vector<SweepEventHoles*> evp;
         ev.reserve (nvertices ()*2);
         evp.reserve (nvertices ()*2);
         for (unsigned i = 0; i < ncontours (); i++) {
@@ -102,10 +105,10 @@ namespace polyclip
                 Segment_2 s = contour(i).segment (j);
                 if (s.is_vertical ()) // vertical segments are not processed
                     continue;
-                ev.push_back (SweepEventHoles<Segment_2> (s.source (), true, i));
-                ev.push_back (SweepEventHoles<Segment_2> (s.target (), true, i));
-                SweepEventHoles<Segment_2>* se1 = &ev[ev.size ()-2];
-                SweepEventHoles<Segment_2>* se2 = &ev[ev.size ()-1];
+                ev.push_back (SweepEventHoles (s.source (), true, i));
+                ev.push_back (SweepEventHoles (s.target (), true, i));
+                SweepEventHoles* se1 = &ev[ev.size ()-2];
+                SweepEventHoles* se2 = &ev[ev.size ()-1];
                 se1->otherEvent = se2;
                 se2->otherEvent = se1;
                 if (se1->point.x < se2->point.x) {
@@ -119,21 +122,21 @@ namespace polyclip
                 evp.push_back (se2);
             }
         }
-        sort (evp.begin (), evp.end (), SweepEventCompHoles<Segment_2>());
+        sort (evp.begin (), evp.end (), SweepEventCompHoles());
         
-        std::set<SweepEventHoles<Segment_2>*, SegmentCompHoles<Segment_2> > SL; // Status line
+        std::set<SweepEventHoles*, SegmentCompHoles> SL; // Status line
         std::vector<bool> processed (ncontours (), false);
         std::vector<int> holeOf (ncontours (), -1);
         unsigned int nprocessed = 0;
         for (unsigned int i = 0; i < evp.size () && nprocessed < ncontours (); i++)  {
-            SweepEventHoles<Segment_2>* e = evp[i];
+            SweepEventHoles* e = evp[i];
             
             if (e->left) { // the segment must be inserted into S
                 e->posSL = SL.insert(e).first;
                 if (!processed[e->pol]) {
                     processed[e->pol] = true;
                     nprocessed++;
-                    typename std::set<SweepEventHoles<Segment_2>*, SegmentCompHoles<Segment_2> >::iterator prev = e->posSL;
+                    typename std::set<SweepEventHoles*, SegmentCompHoles >::iterator prev = e->posSL;
                     if (prev == SL.begin ()) {
                         contour (e->pol).setCounterClockwise ();
                     } else {

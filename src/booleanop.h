@@ -25,16 +25,32 @@ namespace polyclip {
     public:
         typedef Polygon<Contour> Polygon_2;
         typedef typename Contour::Segment_2 Segment_2;
-        typedef SweepEvent<Segment_2> SweepEvent_2;
-        typedef SegmentComp<Segment_2> SegmentComp_2;
-        typedef SweepEventComp<Segment_2> SweepEventComp_2;
         typedef typename Segment_2::Point_2 Point_2;
         typedef typename Point_2::value_type value_type;
         typedef Bbox<value_type> Bbox_2;
 
+        struct SweepEvent_2 : public SweepEvent<Segment_2, false, SweepEvent_2>
+        {
+            typedef SweepEvent<Segment_2, false, SweepEvent_2> Super;
+            SweepEvent_2 () {}
+            SweepEvent_2(bool b, const Point_2& p, SweepEvent_2* other, PolygonType pt, EdgeType et = NORMAL) :
+                Super(b, p, other, pt),
+                type (et), prevInResult (0), inResult (false)
+            {}
+
+            EdgeType type;
+            bool otherInOut; // inOut transition for the segment from the other polygon preceding this segment in sl
+            bool inResult;
+            unsigned int pos;
+            bool resultInOut;
+            unsigned int contourId;
+            SweepEvent_2* prevInResult; // previous segment in sl belonging to the result of the boolean operation
+        };
+        typedef typename SweepEvent_2::SegmentComp SegmentComp_2;
+        typedef typename SweepEvent_2::Comp SweepEventComp_2;
+
         BooleanOpImp (const Polygon_2& subj, const Polygon_2& clip, Polygon_2& result, BooleanOpType op);
         void run ();
-        
 
     private:
         const Polygon_2& subject;
