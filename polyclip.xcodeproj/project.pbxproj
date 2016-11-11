@@ -18,6 +18,11 @@
 		9629F21E1DD405E900D558E6 /* utilities.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9694B8FD1DD2B55C00CE0F5A /* utilities.h */; };
 		9629F2201DD4066600D558E6 /* polyclip.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9629F21F1DD4065E00D558E6 /* polyclip.h */; };
 		9694B9021DD2D35700CE0F5A /* polyclip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9694B9011DD2D35700CE0F5A /* polyclip.cpp */; };
+		96F41A241DD54D15003CA37E /* polyclipdefs.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9629F2211DD549E500D558E6 /* polyclipdefs.h */; };
+		96F41A251DD54D15003CA37E /* sweepevent.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9629F2221DD54A4600D558E6 /* sweepevent.h */; };
+		96F41A261DD54D16003CA37E /* sweepevent.inl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9629F2231DD54A5400D558E6 /* sweepevent.inl */; };
+		96F41A271DD54D16003CA37E /* sweepeventholes.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9629F2241DD54B9800D558E6 /* sweepeventholes.h */; };
+		96F41A281DD54D16003CA37E /* sweepeventholes.inl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9629F2251DD54BA400D558E6 /* sweepeventholes.inl */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,6 +32,11 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				96F41A241DD54D15003CA37E /* polyclipdefs.h in CopyFiles */,
+				96F41A251DD54D15003CA37E /* sweepevent.h in CopyFiles */,
+				96F41A261DD54D16003CA37E /* sweepevent.inl in CopyFiles */,
+				96F41A271DD54D16003CA37E /* sweepeventholes.h in CopyFiles */,
+				96F41A281DD54D16003CA37E /* sweepeventholes.inl in CopyFiles */,
 				9629F2201DD4066600D558E6 /* polyclip.h in CopyFiles */,
 				9629F2161DD405E900D558E6 /* bbox_2.h in CopyFiles */,
 				9629F2171DD405E900D558E6 /* booleanop.inl in CopyFiles */,
@@ -44,6 +54,11 @@
 
 /* Begin PBXFileReference section */
 		9629F21F1DD4065E00D558E6 /* polyclip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = polyclip.h; sourceTree = "<group>"; };
+		9629F2211DD549E500D558E6 /* polyclipdefs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = polyclipdefs.h; sourceTree = "<group>"; };
+		9629F2221DD54A4600D558E6 /* sweepevent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sweepevent.h; sourceTree = "<group>"; };
+		9629F2231DD54A5400D558E6 /* sweepevent.inl */ = {isa = PBXFileReference; lastKnownFileType = text; path = sweepevent.inl; sourceTree = "<group>"; };
+		9629F2241DD54B9800D558E6 /* sweepeventholes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sweepeventholes.h; sourceTree = "<group>"; };
+		9629F2251DD54BA400D558E6 /* sweepeventholes.inl */ = {isa = PBXFileReference; lastKnownFileType = text; path = sweepeventholes.inl; sourceTree = "<group>"; };
 		9694B8E31DD2A45300CE0F5A /* libpolyclip.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libpolyclip.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9694B8F51DD2B55C00CE0F5A /* bbox_2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bbox_2.h; sourceTree = "<group>"; };
 		9694B8F61DD2B55C00CE0F5A /* booleanop.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = booleanop.inl; sourceTree = "<group>"; };
@@ -98,6 +113,11 @@
 				9694B8FC1DD2B55C00CE0F5A /* utilities.inl */,
 				9694B8FD1DD2B55C00CE0F5A /* utilities.h */,
 				9629F21F1DD4065E00D558E6 /* polyclip.h */,
+				9629F2211DD549E500D558E6 /* polyclipdefs.h */,
+				9629F2221DD54A4600D558E6 /* sweepevent.h */,
+				9629F2231DD54A5400D558E6 /* sweepevent.inl */,
+				9629F2241DD54B9800D558E6 /* sweepeventholes.h */,
+				9629F2251DD54BA400D558E6 /* sweepeventholes.inl */,
 			);
 			path = src;
 			sourceTree = "<group>";
