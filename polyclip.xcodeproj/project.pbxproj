@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		96042D881DDAA04F007EB86E /* reusablepriorityqueue.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 96042D871DDA8E7B007EB86E /* reusablepriorityqueue.h */; };
 		96380D531DD5C92300CADFCB /* polyclip.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 96380D4F1DD5C7B400CADFCB /* polyclip.h */; };
 		96380D541DD5C92300CADFCB /* bbox.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9694B8F51DD2B55C00CE0F5A /* bbox.h */; };
 		96380D551DD5C92300CADFCB /* booleanop.inl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9694B8F61DD2B55C00CE0F5A /* booleanop.inl */; };
@@ -32,6 +33,7 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				96042D881DDAA04F007EB86E /* reusablepriorityqueue.h in CopyFiles */,
 				96380D531DD5C92300CADFCB /* polyclip.h in CopyFiles */,
 				96380D541DD5C92300CADFCB /* bbox.h in CopyFiles */,
 				96380D551DD5C92300CADFCB /* booleanop.inl in CopyFiles */,
@@ -53,6 +55,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		96042D871DDA8E7B007EB86E /* reusablepriorityqueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = reusablepriorityqueue.h; sourceTree = "<group>"; };
 		9629F2211DD549E500D558E6 /* polyclipdefs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = polyclipdefs.h; sourceTree = "<group>"; };
 		9629F2221DD54A4600D558E6 /* sweepevent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sweepevent.h; sourceTree = "<group>"; };
 		9629F2231DD54A5400D558E6 /* sweepevent.inl */ = {isa = PBXFileReference; lastKnownFileType = text; path = sweepevent.inl; sourceTree = "<group>"; };
@@ -118,6 +121,7 @@
 				9629F2221DD54A4600D558E6 /* sweepevent.h */,
 				9694B8FC1DD2B55C00CE0F5A /* utilities.inl */,
 				9694B8FD1DD2B55C00CE0F5A /* utilities.h */,
+				96042D871DDA8E7B007EB86E /* reusablepriorityqueue.h */,
 			);
 			path = src;
 			sourceTree = "<group>";

@@ -12,24 +12,29 @@
 namespace polyclip {
     
     template <typename Point_2>
-    BooleanOpImp<Point_2>::BooleanOpImp (const Polygon_2& subj, const Polygon_2& clip, Polygon_2& res, BooleanOpType op) : subject (subj), clipping (clip), result (res), operation (op), eq (), sl (), eventHolder ()
+    BooleanOpImp<Point_2>::BooleanOpImp (const Polygon_2& subj, const Polygon_2& clip) :
+        subject (subj),
+        clipping (clip),
+        subjectBB(subject.bbox ()),
+        clippingBB(clipping.bbox ()),
+        eq (),
+        sl (),
+        eventHolder ()
     {
     }
     
     template <typename Point_2>
-    void BooleanOpImp<Point_2>::run ()
+    void BooleanOpImp<Point_2>::run (Polygon_2& result, BooleanOpType op)
     {
-        Bbox_2 subjectBB(subject.bbox ());     // for optimizations 1 and 2
-        Bbox_2 clippingBB(clipping.bbox ());   // for optimizations 1 and 2
+        eventHolder.clear();
+        sortedEvents.clear();
+        operation = op;
+
         const double MINMAXX = std::min (subjectBB.xmax (), clippingBB.xmax ()); // for optimization 2
-        if (trivialOperation (subjectBB, clippingBB)) // trivial cases can be quickly resolved without sweeping the plane
+        if (trivialOperation (result)) // trivial cases can be quickly resolved without sweeping the plane
             return;
-        for (unsigned int i = 0; i < subject.ncontours (); i++)
-            for (unsigned int j = 0; j < subject.contour (i).nvertices (); j++)
-                processSegment (subject.contour (i).segment (j), SUBJECT);
-        for (unsigned int i = 0; i < clipping.ncontours (); i++)
-            for (unsigned int j = 0; j < clipping.contour (i).nvertices (); j++)
-                processSegment (clipping.contour (i).segment (j), CLIPPING);
+
+        fillEq();
         
         typename std::set<SweepEvent_2*, SegmentComp_2>::iterator it, prev, next;
         
@@ -38,7 +43,7 @@ namespace polyclip {
             // optimization 2
             if ((operation == INTERSECTION && se->point.x > MINMAXX) ||
                 (operation == DIFFERENCE && se->point.x > subjectBB.xmax ())) {
-                connectEdges ();
+                connectEdges (result);
                 return;
             }
             sortedEvents.push_back (se);
@@ -75,11 +80,42 @@ namespace polyclip {
                     possibleIntersection (*prev, *next);
             }
         }
-        connectEdges ();
+        connectEdges (result);
     }
     
     template <typename Point_2>
-    bool BooleanOpImp<Point_2>::trivialOperation (const Bbox_2& subjectBB, const Bbox_2& clippingBB)
+    void BooleanOpImp<Point_2>::fillEq()
+    {
+        if (eq.hasData())
+        {
+            eq.reset();
+        }
+        else
+        {
+            std::size_t nv = 0;
+            for (unsigned int i = 0; i < subject.ncontours (); i++)
+                nv += subject.contour (i).nvertices ();
+            for (unsigned int i = 0; i < clipping.ncontours (); i++)
+                nv += clipping.contour (i).nvertices ();
+            
+            typedef typeof(eq) pq;
+            typedef typename pq::Container Container;
+            Container c;
+            c.reserve(nv * 2);
+            
+            for (unsigned int i = 0; i < subject.ncontours (); i++)
+                for (unsigned int j = 0; j < subject.contour (i).nvertices (); j++)
+                    processSegment (c, subject.contour (i).segment (j), SUBJECT);
+            for (unsigned int i = 0; i < clipping.ncontours (); i++)
+                for (unsigned int j = 0; j < clipping.contour (i).nvertices (); j++)
+                    processSegment (c, clipping.contour (i).segment (j), CLIPPING);
+            
+            eq.set(std::move(c));
+        }
+    }
+    
+    template <typename Point_2>
+    bool BooleanOpImp<Point_2>::trivialOperation (Polygon_2& result)
     {
         // Test 1 for trivial result case
         if (subject.ncontours () * clipping.ncontours () == 0) { // At least one of the polygons is empty
@@ -103,9 +139,9 @@ namespace polyclip {
         }
         return false;
     }
-    
     template <typename Point_2>
-    void BooleanOpImp<Point_2>::processSegment (const Segment_2& s, PolygonType pt)
+    template <typename Container>
+    void BooleanOpImp<Point_2>::processSegment(Container& c, const Segment_2& s, PolygonType pt)
     {
         /*	if (s.degenerate ()) // if the two edge endpoints are equal the segment is dicarded
          return;          // This can be done as preprocessing to avoid "polygons" with less than 3 edges */
@@ -118,8 +154,8 @@ namespace polyclip {
         } else {
             e1->left = false;
         }
-        eq.push (e1);
-        eq.push (e2);
+        c.push (e1);
+        c.push (e2);
     }
     
     template <typename Point_2>
@@ -260,7 +296,7 @@ namespace polyclip {
     }
     
     template <typename Point_2>
-    void BooleanOpImp<Point_2>::connectEdges ()
+    void BooleanOpImp<Point_2>::connectEdges (Polygon_2& result)
     {
         // copy the events in the result polygon to resultEvents array
         std::vector<SweepEvent_2*> resultEvents;

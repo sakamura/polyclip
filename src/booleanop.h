@@ -17,6 +17,7 @@
 #include "polygon.h"
 #include "polyclipdefs.h"
 #include "sweepevent.h"
+#include "reusablepriorityqueue.h"
 
 namespace polyclip {
     template <typename Point_2>
@@ -49,22 +50,27 @@ namespace polyclip {
         typedef typename SweepEvent_2::SegmentComp SegmentComp_2;
         typedef typename SweepEvent_2::Comp SweepEventComp_2;
 
-        BooleanOpImp (const Polygon_2& subj, const Polygon_2& clip, Polygon_2& result, BooleanOpType op);
-        void run ();
+        BooleanOpImp (const Polygon_2& subj, const Polygon_2& clip);
+        void run (Polygon_2& result, BooleanOpType op);
 
     private:
         const Polygon_2& subject;
         const Polygon_2& clipping;
-        Polygon_2& result;
+        Bbox_2 subjectBB;
+        Bbox_2 clippingBB;
         BooleanOpType operation;
-        std::priority_queue<SweepEvent_2*, std::vector<SweepEvent_2*>, SweepEventComp_2> eq; // event queue (sorted events to be processed)
+        reusable_priority_queue<SweepEvent_2*, std::vector<SweepEvent_2*>, SweepEventComp_2> eq; // event queue (sorted events to be processed)
+        
         std::set<SweepEvent_2*, SegmentComp_2> sl; // segments intersecting the sweep line
-        std::deque<SweepEvent_2> eventHolder;    // It holds the events generated during the computation of the boolean operation
         SweepEventComp_2 sec;                    // to compare events
+
+        std::deque<SweepEvent_2> eventHolder;    // It holds the events generated during the computation of the boolean operation
         std::deque<SweepEvent_2*> sortedEvents;
-        bool trivialOperation (const Bbox_2& subjectBB, const Bbox_2& clippingBB);
+        
+        bool trivialOperation (Polygon_2& result);
+        void fillEq();
         /** @brief Compute the events associated to segment s, and insert them into pq and eq */
-        void processSegment (const Segment_2& s, PolygonType pt);
+        template <typename Container> void processSegment (Container& c, const Segment_2& s, PolygonType pt);
         /** @brief Store the SweepEvent e into the event holder, returning the address of e */
         SweepEvent_2 *storeSweepEvent (const SweepEvent_2& e) { eventHolder.push_back (e); return &eventHolder.back (); }
         /** @brief Process a posible intersection between the edges associated to the left events le1 and le2 */
@@ -76,7 +82,7 @@ namespace polyclip {
         /** @brief compute several fields of left event le */
         void computeFields (SweepEvent_2* le, const typename std::set<SweepEvent_2*, SegmentComp_2>::iterator& prev);
         // connect the solution edges to build the result polygon
-        void connectEdges ();
+        void connectEdges (Polygon_2& result);
         int nextPos (int pos, const std::vector<SweepEvent_2*>& resultEvents, const std::vector<bool>& processed);
     };
     
